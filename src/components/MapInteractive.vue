@@ -127,6 +127,17 @@ const handleLogout = () => {
     }
 }
 
+// Konfigurasi Custom Icon
+const customIcon = L.icon({
+    iconUrl: 'green_mark-removebg.png', // Path ke gambar icon kamu (taruh di folder public)
+    iconSize: [38, 38],           // Ukuran gambar icon [lebar, tinggi]
+    iconAnchor: [19, 38],         // Titik pada icon yang menunjuk ke koordinat (biasanya bagian tengah bawah)
+    popupAnchor: [0, -38],        // Posisi popup muncul relatif terhadap iconAnchor
+    // shadowUrl: '/marker-shadow.png', // Opsional: jika kamu punya gambar bayangan
+    // shadowSize: [50, 50],            // Opsional: ukuran bayangan
+    // shadowAnchor: [15, 38]           // Opsional: posisi bayangan
+});
+
 const handleFileUpload = (event) => {
     selectedFile.value = event.target.files[0]
 }
@@ -154,7 +165,8 @@ const renderMarkers = () => {
     for (let key in markerRefs) delete markerRefs[key];
 
     houses.value.forEach(house => {
-        const marker = L.marker([house.lat, house.lng])
+        // --- TAMBAHKAN OPSI ICON DI SINI ---
+        const marker = L.marker([house.lat, house.lng], { icon: customIcon })
 
         const popupHTML = `
       <div style="min-width: 220px; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
